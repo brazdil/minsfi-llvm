@@ -122,9 +122,11 @@ namespace {
         else if (AtomicRMWInst *RMWI = dyn_cast<AtomicRMWInst>(Inst))
           Changed |= LowerAtomicRMWInst(RMWI);
         else if (LoadInst *LI = dyn_cast<LoadInst>(Inst)) {
+          LI->setVolatile(false);
           if (LI->isAtomic())
             LowerLoadInst(LI);
         } else if (StoreInst *SI = dyn_cast<StoreInst>(Inst)) {
+          SI->setVolatile(false);
           if (SI->isAtomic())
             LowerStoreInst(SI);
         }

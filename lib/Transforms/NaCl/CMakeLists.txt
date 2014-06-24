@@ -1,5 +1,10 @@
 add_llvm_library(LLVMNaClTransforms
   AddPNaClExternalDecls.cpp
+  AddSFI.cpp
+  AllocateDataSegment.cpp
+  SandboxIndirectCalls.cpp
+  SandboxMemoryAccesses.cpp
+  StripTls.cpp
   CanonicalizeMemIntrinsics.cpp
   CombineVectorInstructions.cpp
   ConstantInsertExtractElementIndex.cpp

@@ -626,6 +626,11 @@ int main(int argc, char **argv) {
   initializeInstrumentation(Registry);
   initializeTarget(Registry);
   // @LOCALMOD-BEGIN
+  initializeExpandAllocasPass(Registry);
+  initializeAllocateDataSegmentPass(Registry);
+  initializeSandboxIndirectCallsPass(Registry);
+  initializeSandboxMemoryAccessesPass(Registry);
+  initializeStripTlsPass(Registry);
   initializeAddPNaClExternalDeclsPass(Registry);
   initializeCanonicalizeMemIntrinsicsPass(Registry);
   initializeCombineVectorInstructionsPass(Registry);

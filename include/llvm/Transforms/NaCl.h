@@ -14,6 +14,14 @@
 
 namespace llvm {
 
+// XXX: move this to InitializePasses.h!
+class PassRegistry;
+void initializeExpandAllocasPass(PassRegistry&);
+void initializeAllocateDataSegmentPass(PassRegistry&);
+void initializeSandboxIndirectCallsPass(PassRegistry&);
+void initializeSandboxMemoryAccessesPass(PassRegistry&);
+void initializeStripTlsPass(PassRegistry&);
+
 class BasicBlockPass;
 class Function;
 class FunctionPass;
@@ -36,6 +44,11 @@ FunctionPass *createPromoteIntegersPass();
 FunctionPass *createRemoveAsmMemoryPass();
 FunctionPass *createResolvePNaClIntrinsicsPass();
 ModulePass *createAddPNaClExternalDeclsPass();
+ModulePass *createAllocateDataSegmentPass();
+ModulePass *createExpandAllocasPass();
+ModulePass *createSandboxIndirectCallsPass();
+ModulePass *createSandboxMemoryAccessesPass();
+ModulePass *createStripTlsPass();
 ModulePass *createCanonicalizeMemIntrinsicsPass();
 ModulePass *createExpandArithWithOverflowPass();
 ModulePass *createExpandByValPass();

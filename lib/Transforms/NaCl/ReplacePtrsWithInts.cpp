@@ -513,8 +513,11 @@ static void SimplifyCasts(Instruction *Inst, Type *IntPtrType) {
     if (PtrToIntInst *Cast2 = dyn_cast<PtrToIntInst>(Cast1->getOperand(0))) {
       assert(Cast2->getType() == IntPtrType);
       Value *V = Cast2->getPointerOperand();
-      if (V->getType() != Cast1->getType())
+      if (V->getType() != Cast1->getType()) {
+        // Hack: don't convert to bitcast.
+        return;
         V = new BitCastInst(V, Cast1->getType(), V->getName() + ".bc", Cast1);
+      }
       Cast1->replaceAllUsesWith(V);
       if (Cast1->use_empty())
         Cast1->eraseFromParent();

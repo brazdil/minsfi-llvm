@@ -136,6 +136,9 @@ static void ExpandConstant(DataLayout *DL, Constant *Val,
       SmallVector<Value *, 8> Indexes(CE->op_begin() + 1, CE->op_end());
       *ResultOffset += DL->getIndexedOffset(CE->getOperand(0)->getType(),
                                             Indexes);
+    } else if (CE->getOpcode() == Instruction::Add &&
+               isa<ConstantInt>(CE->getOperand(1))) {
+      *ResultOffset += cast<ConstantInt>(CE->getOperand(1))->getZExtValue();
     } else if (CE->getOpcode() == Instruction::BitCast ||
                CE->getOpcode() == Instruction::IntToPtr) {
       // Nothing more to do.

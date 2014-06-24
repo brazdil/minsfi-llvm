@@ -150,6 +150,9 @@ target datalayout = "p:32:32:32"
 
 ; Global references with addends
 
+@reloc_addend_add = global i32 add (i32 ptrtoint (%ptrs1* @ptrs1 to i32), i32 8)
+; CHECK: global i32 add (i32 ptrtoint (<{ i32, [8 x i8] }>* @ptrs1 to i32), i32 8)
+
 @reloc_addend = global i32* getelementptr (%ptrs1* @ptrs1, i32 0, i32 2)
 ; CHECK: @reloc_addend = global i32 add (i32 ptrtoint (<{ i32, [8 x i8] }>* @ptrs1 to i32), i32 8)
 
